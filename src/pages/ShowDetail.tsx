@@ -1,19 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { ShowService } from '../services/show.service';
+import { useShowById } from '../hooks/useShowById';
 
 export default function ShowDetail() {
   const { id } = useParams();
-  const [show, setShow] = useState(undefined);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    ShowService.getShowById(id).then(_show => {
-      setShow(_show);
-      setLoading(false);
-    });
-  }, []);
+  const { show, loading } = useShowById(id);
 
   console.log(show);
   return loading ? (
