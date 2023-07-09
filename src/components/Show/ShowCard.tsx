@@ -1,6 +1,6 @@
 import { IShow } from '../../models/IShow';
 import formatToDDMMYYYY from '../../helpers/dateFormatter.js';
-import onlyTenWords from '../../helpers/stringFormatted';
+import onlyTenWords from '../../helpers/stringFormatter';
 import { Link } from 'react-router-dom';
 
 interface IProps {
