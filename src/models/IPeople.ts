@@ -3,7 +3,7 @@ export interface IPeople {
   person: IPerson;
 }
 
-interface IPerson {
+export interface IPerson {
   id: number;
   url: string;
   name: string;

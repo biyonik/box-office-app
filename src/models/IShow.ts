@@ -1,4 +1,4 @@
-export interface IMovie {
+export interface IShow {
   score: number;
   show: Show;
 }

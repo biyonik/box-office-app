@@ -24,7 +24,7 @@ export default function SearchForm({
     <form onSubmit={handleSearchMovieSubmit}>
       <input
         type="text"
-        placeholder="Search for a movie"
+        placeholder="Search for a show"
         value={searchTerm}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
       />
