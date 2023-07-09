@@ -4,6 +4,7 @@ import { MovieService } from '../services/movie.service';
 import { SearchOption } from '../constants/SearchOption';
 import { PeopleService } from '../services/people.service';
 import { IPeople } from '../models/IPeople';
+import SearchForm from '../components/Home/SearchForm';
 
 export default function HomePage() {
   const { SHOWS, PEOPLE } = SearchOption;
@@ -67,38 +68,15 @@ export default function HomePage() {
   return (
     <div>
       <h3>Home Page</h3>
-      <form onSubmit={handleSearchMovieSubmit}>
-        <input
-          type="text"
-          placeholder="Search for a movie"
-          value={searchTerm}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(e.target.value)}
-        />
-        <label>
-          Shows
-          <input
-            type="radio"
-            name="search-option"
-            value={SHOWS}
-            checked={searchOption.valueOf() === SHOWS}
-            onChange={handleRadioChange}
-          />
-        </label>
-
-        <label>
-          Actors
-          <input
-            type="radio"
-            name="search-option"
-            value={PEOPLE}
-            checked={searchOption.valueOf() === PEOPLE}
-            onChange={handleRadioChange}
-          />
-        </label>
-        <button disabled={!searchTerm || searchTerm.length < 2}>
-          <span>Search</span>
-        </button>
-      </form>
+      <SearchForm
+        handleSearchMovieSubmit={handleSearchMovieSubmit}
+        handleRadioChange={handleRadioChange}
+        setSearchTerm={setSearchTerm}
+        searchTerm={searchTerm}
+        searchOption={searchOption}
+        SHOWS={SHOWS}
+        PEOPLE={PEOPLE}
+      />
       <div>{searchOption === SHOWS ? renderMovieCards() : renderActorCards()}</div>
     </div>
   );
