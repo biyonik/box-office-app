@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
 
 export default function HomePage() {
   return (
     <div>
-      <Link to="/starred">Go to Starred page</Link>
+      <h3>Home Page</h3>
     </div>
   );
 }
