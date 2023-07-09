@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { MovieService } from '../services/movie.service';
 import { IMovie } from '../models/IMovie';
+import { MovieService } from '../services/movie.service';
 
 export default function HomePage() {
   const [searchedMovie, setSearchedMovie] = useState<string>('');
@@ -10,6 +10,26 @@ export default function HomePage() {
     e.preventDefault();
     const moviesFromService = await MovieService.getMovieBySearch(searchedMovie);
     setMovies(moviesFromService);
+  }
+
+  const renderMovieCards = () => {
+    if (!movies.length) {
+      return <div>No movies found</div>
+    }
+    return movies.map((movie: IMovie) => {
+      return (
+        <div key={movie.show?.id}>
+          <h3>{movie.show?.name}</h3>
+          {
+            movie.show?.image?.medium ? (
+              <img src={movie.show?.image?.medium} alt={movie.show?.name} />
+            ): (
+              <span>Image not found for this movie</span>
+            )
+          }
+        </div>
+      )
+    });
   }
 
   return (
@@ -28,6 +48,9 @@ export default function HomePage() {
           <span>Search</span>
         </button>
       </form>
+      <div>
+        {renderMovieCards()}
+      </div>
     </div>
   );
 }
