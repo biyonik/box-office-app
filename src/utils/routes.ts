@@ -9,11 +9,7 @@ export const ROUTES: IRoute[] = [
     text: 'Home',
   },
   {
-    to: '/movies',
-    text: 'Movies',
-  },
-  {
     to: '/starred',
     text: 'Starred',
-  }
-]
+  },
+];
