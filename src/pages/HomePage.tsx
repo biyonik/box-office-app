@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IShow } from '../models/IShow';
-import { MovieService } from '../services/movie.service';
+import { ShowService } from '../services/show.service';
 import { SearchOption } from '../constants/SearchOption';
 import { PeopleService } from '../services/people.service';
 import { IPeople } from '../models/IPeople';
@@ -23,7 +23,7 @@ export default function HomePage() {
   const handleSearchMovieSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchOption === SHOWS) {
-      const data = await MovieService.getMovieBySearch(searchTerm);
+      const data = await ShowService.getShowBySearch(searchTerm);
       setShows(data);
     } else if (searchOption === PEOPLE) {
       const data = await PeopleService.getPeopleBySearch(searchTerm);

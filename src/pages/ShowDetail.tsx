@@ -1,11 +1,53 @@
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { ShowService } from '../services/show.service';
 
 export default function ShowDetail() {
   const { id } = useParams();
+  const [show, setShow] = useState(undefined);
+  const [loading, setLoading] = useState(true);
 
-  return (
+  useEffect(() => {
+    setLoading(true);
+    ShowService.getShowById(id).then(_show => {
+      setShow(_show);
+      setLoading(false);
+    });
+  }, []);
+
+  console.log(show);
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <div>
-      <h1>show detail</h1>
+      <h3>Show Detail</h3>
+      <div>
+        <img src={show.image?.medium} alt={show.name} />
+      </div>
+      <div>
+        <h3>{show.name}</h3>
+        <div dangerouslySetInnerHTML={{ __html: show.summary }} />
+      </div>
+      <div>
+        <h4>Genres</h4>
+        <ul>
+          {show.genres?.map(genre => (
+            <li key={genre}>{genre}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4>Language</h4>
+        <p>{show.language}</p>
+      </div>
+      <div>
+        <h4>Rating</h4>
+        <p>{show.rating?.average}</p>
+      </div>
+      <div>
+        <h4>Runtime</h4>
+        <p>{show.runtime}</p>
+      </div>
     </div>
   );
 }
