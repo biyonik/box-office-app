@@ -1,13 +1,17 @@
 import { useParams } from 'react-router-dom';
-import { useShowById } from '../hooks/useShowById';
+import { useQuery } from '@tanstack/react-query';
+import { ShowService } from '../services/show.service';
+import { Show } from '../models/IShow';
 
 export default function ShowDetail() {
   const { id } = useParams();
-  const { show, loading } = useShowById(id);
+  const { data, error, isLoading, isError } = useQuery(['show', { id }], () => ShowService.getShowById(id));
+  const show = data as Show;
 
-  console.log(show);
-  return loading ? (
+  return isLoading ? (
     <div>Loading...</div>
+  ) : isError ? (
+    <div>Error: {error?.message}</div>
   ) : (
     <div>
       <h3>Show Detail</h3>

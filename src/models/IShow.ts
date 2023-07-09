@@ -3,7 +3,7 @@ export interface IShow {
   show: Show;
 }
 
-interface Show {
+export interface Show {
   id: number;
   url: string;
   name: string;
