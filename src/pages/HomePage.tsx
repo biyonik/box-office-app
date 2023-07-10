@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 import { SearchOption } from '../constants/SearchOption';
 import { IShow } from '../models/IShow';
 import { IPeople } from '../models/IPeople';

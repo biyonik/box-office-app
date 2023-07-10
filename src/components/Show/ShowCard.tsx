@@ -1,10 +1,10 @@
 import { IShow } from '../../models/IShow';
 import formatToDDMMYYYY from '../../helpers/dateFormatter.js';
 import onlyTenWords from '../../helpers/stringFormatter';
-import { Link } from 'react-router-dom';
 
 interface IProps {
   show: IShow;
+  onStarMeClick: (showId: any) => void;
 }
 
 const showPremieredAsFormatted = (premiered: string) => {
@@ -14,7 +14,7 @@ const showPremieredAsFormatted = (premiered: string) => {
   return formatToDDMMYYYY(premiered);
 };
 
-export default function ShowCard({ show }: React.FC<IProps>) {
+export default function ShowCard({ show, onStarMeClick }: React.FC<IProps>) {
   return (
     <div>
       {show.image ? (
@@ -28,8 +28,12 @@ export default function ShowCard({ show }: React.FC<IProps>) {
       <p>Genres: {show.genres?.join(', ') ?? ''}</p>
       <p>Summary: {onlyTenWords(show.summary)}</p>
       <div>
-        <Link to={`/show/${show.id}`}>Read more</Link>
-        <button type={'button'}>Star me</button>
+        <a href={`/show/${show.id}`} target={'_blank'} rel={'noreferrer'}>
+          Read more
+        </a>
+        <button type={'button'} onClick={() => onStarMeClick(show.id)}>
+          Star me
+        </button>
       </div>
     </div>
   );
