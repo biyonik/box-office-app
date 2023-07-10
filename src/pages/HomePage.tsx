@@ -7,10 +7,11 @@ import { PeopleService } from '../services/people.service';
 import SearchForm from '../components/Home/SearchForm';
 import ShowGrid from '../components/Show/ShowGrid';
 import PeopleGrid from '../components/People/PeopleGrid';
+import { useSearchTerm } from '../hooks/useSearchTerm';
 
 export default function HomePage() {
   const { SHOWS, PEOPLE } = SearchOption;
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useSearchTerm();
   const [searchOption, setSearchOption] = useState<SearchOption>(SHOWS);
   const [shows, setShows] = useState<IShow[]>([]);
   const [people, setPeople] = useState<IPeople[]>([]);
