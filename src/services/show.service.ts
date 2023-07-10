@@ -16,7 +16,7 @@ export class ShowService {
 
   static async getShowById(id: string): Promise<IShow> {
     try {
-      const response = await fetch(`${VITE_API_URL}/shows/${id}`);
+      const response = await fetch(`${VITE_API_URL}/shows/${id}?embed[]=cast&embed[]=seasons`);
       return (await response.json()) as IShow;
     } catch (error) {
       console.error('Error fetching movie by id: ', error);

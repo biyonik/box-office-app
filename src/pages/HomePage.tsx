@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { IShow } from '../models/IShow';
-import { ShowService } from '../services/show.service';
 import { SearchOption } from '../constants/SearchOption';
-import { PeopleService } from '../services/people.service';
+import { IShow } from '../models/IShow';
 import { IPeople } from '../models/IPeople';
+import { ShowService } from '../services/show.service';
+import { PeopleService } from '../services/people.service';
 import SearchForm from '../components/Home/SearchForm';
 import ShowGrid from '../components/Show/ShowGrid';
 import PeopleGrid from '../components/People/PeopleGrid';
@@ -18,6 +18,8 @@ export default function HomePage() {
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchOption(value as SearchOption);
+    shows.length ? setShows([]) : false;
+    people.length ? setPeople([]) : false;
   };
 
   const handleSearchMovieSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

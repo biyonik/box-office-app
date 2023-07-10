@@ -2,10 +2,16 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ShowService } from '../services/show.service';
 import { Show } from '../models/IShow';
+import Main from '../components/Show/Detail/Main';
+import SubInfo from '../components/Show/Detail/SubInfo';
+import Seasons from '../components/Show/Detail/Seasons';
+import Casts from '../components/Show/Detail/Casts';
 
 export default function ShowDetail() {
   const { id } = useParams();
-  const { data, error, isLoading, isError } = useQuery(['show', { id }], () => ShowService.getShowById(id));
+  const { data, error, isLoading, isError } = useQuery(['show', { id }], () => ShowService.getShowById(id), {
+    refetchOnWindowFocus: false,
+  });
   const show = data as Show;
 
   return isLoading ? (
@@ -15,32 +21,25 @@ export default function ShowDetail() {
   ) : (
     <div>
       <h3>Show Detail</h3>
+      <Main name={show.name} image={show.image} summary={show.summary} genres={show.genres} />
       <div>
-        <img src={show.image?.medium} alt={show.name} />
+        <h2>Details</h2>
+        <SubInfo
+          language={show.language}
+          rating={show.rating}
+          runtime={show.runtime}
+          status={show.status}
+          network={show.network}
+          premiered={show.premiered}
+        />
       </div>
       <div>
-        <h3>{show.name}</h3>
-        <div dangerouslySetInnerHTML={{ __html: show.summary }} />
+        <h2>Season</h2>
+        <Seasons seasons={show._embedded.seasons} />
       </div>
       <div>
-        <h4>Genres</h4>
-        <ul>
-          {show.genres?.map(genre => (
-            <li key={genre}>{genre}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h4>Language</h4>
-        <p>{show.language}</p>
-      </div>
-      <div>
-        <h4>Rating</h4>
-        <p>{show.rating?.average}</p>
-      </div>
-      <div>
-        <h4>Runtime</h4>
-        <p>{show.runtime}</p>
+        <h2>Casts</h2>
+        <Casts casts={show._embedded.cast} />
       </div>
     </div>
   );

@@ -20,57 +20,154 @@ export interface Show {
   rating: Rating;
   weight: number;
   network: Network;
-  webChannel?: null | string;
-  dvdCountry?: null | string;
+  webChannel: any;
+  dvdCountry: any;
   externals: Externals;
   image: Image;
   summary: string;
   updated: number;
   _links: Links;
+  _embedded: Embedded;
 }
 
-interface Schedule {
+export interface Schedule {
   time: string;
   days: string[];
 }
 
-interface Rating {
-  average: number;
+export interface Rating {
+  average: any;
 }
 
-interface Network {
+export interface Network {
   id: number;
   name: string;
   country: Country;
   officialSite: string;
 }
 
-interface Country {
+export interface Country {
   name: string;
   code: string;
   timezone: string;
 }
 
-interface Externals {
-  tvrage: number;
+export interface Externals {
+  tvrage: any;
   thetvdb: number;
   imdb: string;
 }
 
-interface Image {
+export interface Image {
   medium: string;
   original: string;
 }
 
-interface Links {
+export interface Links {
   self: Self;
   previousepisode: Previousepisode;
 }
 
-interface Self {
+export interface Self {
   href: string;
 }
 
-interface Previousepisode {
+export interface Previousepisode {
+  href: string;
+}
+
+export interface Embedded {
+  cast: Cast[];
+  seasons: Season[];
+}
+
+export interface Cast {
+  person: Person;
+  character: Character;
+  self: boolean;
+  voice: boolean;
+}
+
+export interface Person {
+  id: number;
+  url: string;
+  name: string;
+  country: Country2;
+  birthday: string;
+  deathday: any;
+  gender: string;
+  image: Image2;
+  updated: number;
+  _links: Links2;
+}
+
+export interface Country2 {
+  name: string;
+  code: string;
+  timezone: string;
+}
+
+export interface Image2 {
+  medium: string;
+  original: string;
+}
+
+export interface Links2 {
+  self: Self2;
+}
+
+export interface Self2 {
+  href: string;
+}
+
+export interface Character {
+  id: number;
+  url: string;
+  name: string;
+  image: any;
+  _links: Links3;
+}
+
+export interface Links3 {
+  self: Self3;
+}
+
+export interface Self3 {
+  href: string;
+}
+
+export interface Season {
+  id: number;
+  url: string;
+  number: number;
+  name: string;
+  episodeOrder: number;
+  premiereDate: string;
+  endDate: string;
+  network: Network2;
+  webChannel: any;
+  image: any;
+  summary: any;
+  _links: Links4;
+}
+
+export interface Network2 {
+  id: number;
+  name: string;
+  country: Country3;
+  officialSite: string;
+}
+
+export interface Country3 {
+  name: string;
+  code: string;
+  timezone: string;
+}
+
+export interface Links4 {
+  self: Self4;
+}
+
+export interface Self4 {
   href: string;
 }
