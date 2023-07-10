@@ -5,6 +5,7 @@ import onlyTenWords from '../../helpers/stringFormatter';
 interface IProps {
   show: IShow;
   onStarMeClick: (showId: any) => void;
+  isStarred: boolean;
 }
 
 const showPremieredAsFormatted = (premiered: string) => {
@@ -14,7 +15,7 @@ const showPremieredAsFormatted = (premiered: string) => {
   return formatToDDMMYYYY(premiered);
 };
 
-export default function ShowCard({ show, onStarMeClick }: React.FC<IProps>) {
+export default function ShowCard({ show, onStarMeClick, isStarred }: React.FC<IProps>) {
   return (
     <div>
       {show.image ? (
@@ -32,7 +33,7 @@ export default function ShowCard({ show, onStarMeClick }: React.FC<IProps>) {
           Read more
         </a>
         <button type={'button'} onClick={() => onStarMeClick(show.id)}>
-          Star me
+          {isStarred ? 'Unstar me' : 'Star me'}
         </button>
       </div>
     </div>
