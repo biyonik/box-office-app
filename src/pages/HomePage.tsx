@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchOption } from '../constants/SearchOption';
 import { IShow } from '../models/IShow';
 import { IPeople } from '../models/IPeople';
@@ -8,6 +8,7 @@ import SearchForm from '../components/Home/SearchForm';
 import ShowGrid from '../components/Show/ShowGrid';
 import PeopleGrid from '../components/People/PeopleGrid';
 import { useSearchTerm } from '../hooks/useSearchTerm';
+import { TextCenter } from '../components/Common/TextCenter';
 
 export default function HomePage() {
   const { SHOWS, PEOPLE } = SearchOption;
@@ -34,23 +35,32 @@ export default function HomePage() {
     }
   };
 
+  useEffect(() => {
+    if (!searchTerm) {
+      if (searchOption === SHOWS) {
+        setShows([]);
+      } else if (searchOption === PEOPLE) {
+        setPeople([]);
+      }
+    }
+  }, [searchTerm]);
+
   const renderShowCards = () => {
     if (!shows.length) {
-      return <div>No shows found</div>;
+      return <TextCenter>No shows found</TextCenter>;
     }
     return <ShowGrid shows={shows} />;
   };
 
   const renderActorCards = () => {
     if (!people.length) {
-      return <div>No actors found</div>;
+      return <TextCenter>No actors found</TextCenter>;
     }
     return <PeopleGrid people={people} />;
   };
 
   return (
     <div>
-      <h3>Home Page</h3>
       <SearchForm
         handleSearchMovieSubmit={handleSearchMovieSubmit}
         handleRadioChange={handleRadioChange}

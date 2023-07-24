@@ -1,4 +1,5 @@
 import formatToDDMMYYYY from '../../../helpers/dateFormatter';
+import styled from 'styled-components';
 
 interface IProps {
   language: string;
@@ -13,6 +14,12 @@ interface IProps {
   premiered: string;
 }
 
+const DetailsWrapper = styled.div`
+  p {
+    margin: 5px 0;
+  }
+`;
+
 const showPremieredDateFormatted = (premiered: string) => {
   if (!premiered) {
     return 'N/A';
@@ -22,7 +29,7 @@ const showPremieredDateFormatted = (premiered: string) => {
 
 export default function SubInfo({ language, rating, runtime, status, network, premiered }: React.FC<IProps>) {
   return (
-    <>
+    <DetailsWrapper>
       <div>
         <h4>Language</h4>
         <p>{language}</p>
@@ -47,6 +54,6 @@ export default function SubInfo({ language, rating, runtime, status, network, pr
         <h4>Premiered</h4>
         <p>{showPremieredDateFormatted(premiered)}</p>
       </div>
-    </>
+    </DetailsWrapper>
   );
 }
